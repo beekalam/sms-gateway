@@ -30,6 +30,6 @@ class SMSController extends Controller
 
     public function report()
     {
-        return SMSLog::paginate();
+        return SMSLog::latest()->paginate();
     }
 }
