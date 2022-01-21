@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
     public function report()
     {
-        $reports = SMSLog::latest()->paginate();
+        $reports = SMSLog::latest()->paginate(10);
         return view("reports.index",["reports" => $reports]);
     }
 }

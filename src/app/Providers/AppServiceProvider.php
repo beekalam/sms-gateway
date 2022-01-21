@@ -20,16 +20,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SMSAdapter::class, function () {
 
             switch (env('SMS_PROVIDER')) {
-                case 'KAVENEGAR':
+
+                case Kavenegar::SMS_PROVIDER_NAME:
                     return new Kavenegar(env('KAVENEGAR_SENDER'), env('KAVENEGAR_API_KEY'));
                     break;
 
-                case 'GHASEDAK':
+                case Ghasedak::SMS_PROVIDER_NAME:
                     return new Ghasedak(env('GHASEDAK_SENDER'), env('GHASEDAK_API_KEY'));
 
                 default:
                     throw new InvalidArgumentException('SMS_PROVIDER is not set');
                     break;
+
             }
         });
     }
