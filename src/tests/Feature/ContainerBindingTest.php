@@ -24,7 +24,7 @@ class ContainerBindingTest extends TestCase
 
     public function test_config()
     {
-        Env::getRepository()->set('SMS_PROVIDER', 'GHASEDAK');
+        Env::getRepository()->set('SMS_PROVIDER', Ghasedak::SMS_PROVIDER_NAME);
 
         $sms = app(SMSAdapter::class);
 
