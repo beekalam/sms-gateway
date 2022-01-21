@@ -24,6 +24,9 @@ Route::middleware(["auth"])->group(function () {
 
     Route::get("/dashboard", [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get("/reports", [DashboardController::class, 'report'])->name('reports');
+
+    Route::get('/change-password',[DashboardController::class, 'changePassword']);
+    Route::post('/change-password',[DashboardController::class, 'storePassword']);
 });
 
 

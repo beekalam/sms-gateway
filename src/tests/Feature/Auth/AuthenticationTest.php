@@ -5,6 +5,7 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -41,5 +42,28 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertGuest();
+    }
+
+    public function test_guests_can_not_change_password()
+    {
+        $this->get("/change-password")->assertRedirect(route('login'));
+    }
+
+    public function test_authenticated_user_can_view_change_user_password()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user)
+            ->get("/change-password")
+            ->assertOk();
+    }
+
+    public function test_authenticated_user_can_change_password()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->post("/change-password", ['password' => '123456', 'password_confirmation' => '123456']);
+
+        $this->assertTrue(Hash::check("123456", $user->fresh()->password));
     }
 }
