@@ -18,9 +18,8 @@ services:
       - ./src:/var/www/html:delegated
     depends_on:
       - php
-      - redis
       - mysql
-      - mailhog
+      - supervisor
     networks:
       - laravel
 
@@ -51,15 +50,6 @@ services:
     container_name: php
     volumes:
       - ./src:/var/www/html:delegated
-    networks:
-      - laravel
-
-  redis:
-    image: redis:alpine
-    container_name: redis
-    restart: unless-stopped
-    ports:
-      - 6379:6379
     networks:
       - laravel
 
@@ -111,11 +101,15 @@ services:
     networks:
       - laravel
 
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: mailhog
-    ports:
-      - 1025:1025
-      - 8025:8025
+  supervisor:
+    build:
+      context: ./dockerfiles
+      dockerfile: supervisor.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    container_name: supervisor
+    volumes:
+      - ./src:/var/www/html:delegated
     networks:
       - laravel
