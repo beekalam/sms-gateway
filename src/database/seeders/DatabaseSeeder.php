@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("123456")
         ]);
 
-        SMSLog::factory(100)->create();
+        SMSLog::factory(11)->create();
     }
 }

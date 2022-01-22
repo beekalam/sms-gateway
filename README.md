@@ -4,7 +4,7 @@
 
 ### Since the flow should be async we use a queue.
 
-[<img src="docs/design-diagram.png">]("")
+[<img src="docs/design-diagram.png">]("https://github.com/beekalam/sms-gateway")
 
 ###
 

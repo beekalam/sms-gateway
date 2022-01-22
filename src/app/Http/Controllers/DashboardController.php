@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\SMSLog;
-use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Queue;
 
 class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view("dashboard");
+        return view("dashboard", [
+            'num_jobs' => Queue::size(),
+            'sent_messages_count' => SMSLog::count()
+        ]);
     }
 
     public function report()

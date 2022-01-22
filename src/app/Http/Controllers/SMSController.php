@@ -15,7 +15,7 @@ class SMSController extends Controller
     {
         $request->validate([
             'mobile' => ["required", "regex:/^(0\d{10})|(\+\d{12})$/"],
-            'message' => ["required"] //todo: max length
+            'message' => ["required","string","max:900"]
         ]);
 
         $message = new SendMessage(
