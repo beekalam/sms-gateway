@@ -182,8 +182,8 @@ class AppServiceProvider extends ServiceProvider
                 // Here you tell the container how to build our AwesomeSMSProvider class
                 case 'AWESOME_PROVIDER':
                     return new AwesomeSMSProvider(
-                        env('AWESOME_API_KEY'),
-                        env('AWESOME_SENDER')
+                        env('AWESOME_SENDER'),
+                        env('AWESOME_API_KEY')
                     );
                 //...
             }
