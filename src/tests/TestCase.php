@@ -16,6 +16,7 @@ abstract class TestCase extends BaseTestCase
     {
         Env::getRepository()->set('SMS_PROVIDER', Kavenegar::SMS_PROVIDER_NAME);
         Env::getRepository()->set('KAVENEGAR_SENDER', '1001');
+        Env::getRepository()->set('KAVENEGAR_API_KEY', '1001');
 
         /**@var $kavenegar_mock MockerInterface */
         $kavenegar_mock = m::mock('overload:Kavenegar\KavenegarApi');
@@ -29,6 +30,7 @@ abstract class TestCase extends BaseTestCase
     {
         Env::getRepository()->set('SMS_PROVIDER', Ghasedak::SMS_PROVIDER_NAME);
         Env::getRepository()->set('GHASEDAK_SENDER', '1000');
+        Env::getRepository()->set('GHASEDAK_API_KEY', '1000');
 
         /**@var $ghasedak_mock MockerInterface */
         $ghasedak_mock = m::mock('overload:Ghasedak\GhasedakApi');

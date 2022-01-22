@@ -37,5 +37,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->reportable(function (CredentialsException $e) {
+            // return response()->json(['error' => $e->getMessage()]);
+            // return false;
+        });
+
+        $this->renderable(function (CredentialsException $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        });
     }
 }

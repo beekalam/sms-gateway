@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Exceptions\CredentialsException;
 use Illuminate\Support\ServiceProvider;
 use App\SMSGateway\Kavenegar;
 use App\SMSGateway\Ghasedak;
@@ -22,16 +23,25 @@ class AppServiceProvider extends ServiceProvider
             switch (env('SMS_PROVIDER')) {
 
                 case Kavenegar::SMS_PROVIDER_NAME:
-                    return new Kavenegar(env('KAVENEGAR_SENDER'), env('KAVENEGAR_API_KEY'));
+                    $sender = env('KAVENEGAR_SENDER');
+                    $apiKey = env('KAVENEGAR_API_KEY');
+                    if (empty($apiKey)) {
+                        throw new CredentialsException('Apikey is not provided.');
+                    }
+                    return new Kavenegar($apiKey, $sender);
                     break;
 
                 case Ghasedak::SMS_PROVIDER_NAME:
-                    return new Ghasedak(env('GHASEDAK_SENDER'), env('GHASEDAK_API_KEY'));
+                    $sender = env('GHASEDAK_SENDER');
+                    $apiKey =  env('GHASEDAK_API_KEY');
+                    if (empty($apiKey)) {
+                        throw new CredentialsException('Apikey is not provided.');
+                    }
+                    return new Ghasedak($apiKey, $sender);
 
                 default:
-                    throw new InvalidArgumentException('SMS_PROVIDER is not set');
+                    throw new CredentialsException("SMS provider credentials is missing.");
                     break;
-
             }
         });
     }
