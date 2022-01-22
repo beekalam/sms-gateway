@@ -70,6 +70,8 @@ tell the Service Container how to instantiate our new provider. See example.
 
 ## Docker workflow
 
+An example config file `.env.docker.example` is provided.
+
 before running with docker `mysql` host should be changed:
 
 ```
@@ -82,14 +84,21 @@ DB_USERNAME=laravel
 DB_PASSWORD=secret
 ```
 
+Queue connection should be `database`
+```
+# ...
+QUEUE_CONNECTION=database
+```
+
 ### Building
 
+
 ```shell
-docker-compose up -d
-docker-compose --rm composer install
-docker-compose --rm artisan migrate:fresh --seed
-docker-compose --rm npm install
-docker-compose --rm npm run dev
+docker-compose up
+docker-compose run --rm composer install
+docker-compose run --rm artisan migrate:fresh --seed
+docker-compose run --rm npm install
+docker-compose run --rm npm run dev
 ```
 
 ### Running tests
@@ -99,6 +108,15 @@ docker-compose --rm run artisan test
 ```
 
 ## Local development workflow
+
+An example config file `.env.local.example` is provided.
+
+Queue connection should be `database`
+
+```
+# ...
+QUEUE_CONNECTION=database
+```
 
 ```
 composer install
