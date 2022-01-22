@@ -25,7 +25,10 @@ class SMSController extends Controller
 
         dispatch($message);
 
-        return response(['success' => true]);
+        return response([
+            'success' => true,
+            'message' => 'your message is added to queue.'
+        ]);
     }
 
     public function report()

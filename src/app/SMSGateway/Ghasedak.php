@@ -6,6 +6,7 @@ use App\SMSGateway\SMSAdapter;
 use Ghasedak\GhasedakApi;
 use Ghasedak\Exceptions\ApiException;
 use Ghasedak\Exceptions\HttpException;
+use Illuminate\Support\Facades\Log;
 
 class Ghasedak implements SMSAdapter
 {
@@ -18,6 +19,8 @@ class Ghasedak implements SMSAdapter
     {
         $this->apikey = $apikey;
         $this->sender = $sender;
+        Log::info("apikey: $apikey");
+        Log::info("sender: $apikey");
     }
 
     public function sendMessage(SMSMessage $smsMessage)

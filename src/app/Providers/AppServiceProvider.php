@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 use App\SMSGateway\Kavenegar;
 use App\SMSGateway\Ghasedak;
 use App\SMSGateway\SMSAdapter;
-use InvalidArgumentException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
                     if (empty($apiKey)) {
                         throw new CredentialsException('Apikey is not provided.');
                     }
-                    return new Kavenegar($apiKey, $sender);
+                    return new Kavenegar($sender, $apiKey);
                     break;
 
                 case Ghasedak::SMS_PROVIDER_NAME:
@@ -37,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
                     if (empty($apiKey)) {
                         throw new CredentialsException('Apikey is not provided.');
                     }
-                    return new Ghasedak($apiKey, $sender);
+                    return new Ghasedak($sender, $apiKey);
 
                 default:
                     throw new CredentialsException("SMS provider credentials is missing.");
