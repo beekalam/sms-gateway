@@ -2,9 +2,11 @@
 
 ## Design decisions
 
-Since the flow should be async we use a queue.
+### Since the flow should be async we use a queue.
 
-[<img src="../docs/design-diagram.png">]("")
+[<img src="docs/design-diagram.png">]("")
+
+###
 
 ## Docker workflow
 
@@ -22,6 +24,20 @@ docker-compose --rm npm run dev
 
 ```
 docker-compose --rm run artisan test
+```
+
+## Local development workflow
+
+```
+composer install
+php artisan migrate:fresh -seed
+php artisan queue:work
+php artisan serve
+```
+
+### running tests
+```
+./vendor/bin/phpunit
 ```
 
 ## How to add new sms provider?
