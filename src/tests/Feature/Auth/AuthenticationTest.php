@@ -49,7 +49,7 @@ class AuthenticationTest extends TestCase
         $this->get("/change-password")->assertRedirect(route('login'));
     }
 
-    public function test_authenticated_user_can_view_change_user_password()
+    public function test_authenticated_user_can_view_change_password_view()
     {
         $user = User::factory()->create();
         $this->actingAs($user)

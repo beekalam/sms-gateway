@@ -10,7 +10,7 @@ class ReportTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_should_send_message_when_correct_number_provided()
+    public function test_reports()
     {
         $smslog = SMSLog::factory()->create();
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Feature\Admin;
 
 use App\Models\SMSLog;
@@ -12,8 +13,7 @@ class ReportTest extends TestCase
 
     public function test_guests_can_not_view_reports_page()
     {
-        $response = $this->get('/reports');
-        $response->assertRedirect(route("login"));
+        $this->get('/reports')->assertRedirect(route("login"));
     }
 
     public function test_logedin_users_can_view_reports()
@@ -24,6 +24,5 @@ class ReportTest extends TestCase
 
         $response->assertOk();
         $response->assertSee($sms_log->mobile);
-
     }
 }
